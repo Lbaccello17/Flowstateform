@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlowState — Research Creadores</title>
+<title>FlowState — Creator Research</title>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,7 +17,6 @@
   --text: #FFFFFF;
   --muted: rgba(255,255,255,0.45);
   --cyan: #00D2FF;
-  --purple: #9B6DFF;
   --grad: linear-gradient(90deg, #00D2FF, #9B6DFF);
   --btn-grad: linear-gradient(90deg, #00C9FF, #7B5EFF, #A855F7);
   --badge-bg: rgba(255,255,255,0.07);
@@ -27,517 +26,158 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg); color: var(--text);
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient blobs */
-.blob {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  z-index: 0;
-}
-.blob-1 {
-  width: 500px; height: 500px;
-  background: rgba(100, 0, 180, 0.30);
-  top: -150px; left: -100px;
-}
-.blob-2 {
-  width: 600px; height: 400px;
-  background: rgba(0, 180, 200, 0.18);
-  bottom: -100px; right: -150px;
-}
+.blob { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+.blob-1 { width: 500px; height: 500px; background: rgba(100,0,180,0.30); top: -150px; left: -100px; }
+.blob-2 { width: 600px; height: 400px; background: rgba(0,180,200,0.18); bottom: -100px; right: -150px; }
 
-.wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 0 24px 100px;
-}
+.wrap { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 0 24px 100px; }
 
-/* ── NAV ── */
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px 0 0;
-  margin-bottom: 64px;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
+/* NAV */
+nav { display: flex; align-items: center; justify-content: space-between; padding: 28px 0 0; margin-bottom: 56px; }
+.nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo-icon {
-  width: 36px; height: 36px;
-  background: linear-gradient(135deg, #6B21FF, #00C9FF);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; background: linear-gradient(135deg, #6B21FF, #00C9FF);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
 }
-
 .logo-icon svg { width: 20px; height: 20px; }
+.logo-wordmark { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
 
-.logo-wordmark {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.01em;
+.lang-selector {
+  display: flex; align-items: center; gap: 3px;
+  background: var(--badge-bg); border: 1px solid var(--badge-border);
+  border-radius: 10px; padding: 4px;
 }
-
-.nav-badge {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-border);
-  border-radius: 99px;
-  padding: 6px 14px;
+.lang-btn {
+  font-family: inherit; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); background: transparent; border: none;
+  border-radius: 7px; padding: 5px 9px; cursor: pointer; transition: all 0.15s;
 }
+.lang-btn:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.06); }
+.lang-btn.active { color: var(--cyan); background: rgba(0,210,255,0.10); }
 
-/* ── HERO ── */
-.hero {
-  text-align: center;
-  margin-bottom: 56px;
-}
-
+/* HERO */
+.hero { text-align: center; margin-bottom: 52px; }
 .hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  background: var(--badge-bg);
-  border: 1px solid var(--badge-border);
-  border-radius: 99px;
-  padding: 7px 18px;
-  margin-bottom: 28px;
+  display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+  background: var(--badge-bg); border: 1px solid var(--badge-border);
+  border-radius: 99px; padding: 7px 18px; margin-bottom: 28px;
 }
+.hero-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background: var(--grad); }
+.hero h1 { font-size: clamp(34px,7vw,54px); font-weight:900; line-height:1.05; letter-spacing:-0.03em; color:#fff; margin-bottom:20px; }
+.hero h1 .grad { background: var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero p { font-size:15px; line-height:1.65; color:var(--muted); max-width:480px; margin:0 auto; }
 
-.hero-eyebrow::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--grad);
-}
-
-.hero h1 {
-  font-size: clamp(38px, 7vw, 58px);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.hero h1 .grad {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero p {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--muted);
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-/* ── PROGRESS ── */
+/* PROGRESS */
 .progress-sticky {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(8,8,15,0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  margin-bottom: 8px;
+  position: sticky; top:0; z-index:20;
+  background: rgba(8,8,15,0.88); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 14px 0; margin-bottom: 8px;
 }
+.progress-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.progress-label { font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+.progress-count { font-size:11px; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.progress-track { height:2px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden; }
+.progress-fill { height:100%; background:var(--grad); border-radius:99px; transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1); width:0%; }
 
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+/* SECTIONS */
+.section { margin-bottom:52px; }
+.section-head { display:flex; align-items:center; gap:14px; margin-bottom:32px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.section-num { font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--cyan); background:var(--badge-bg); border:1px solid rgba(0,210,255,0.25); border-radius:6px; padding:4px 10px; }
+.section-title { font-size:13px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+
+/* QUESTIONS */
+.q { margin-bottom:36px; animation:fadeUp 0.35s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
+.q-text { font-size:14px; font-weight:500; line-height:1.55; color:rgba(255,255,255,0.90); margin-bottom:14px; display:flex; gap:10px; }
+.q-n { color:var(--muted); font-size:12px; font-weight:400; padding-top:2px; min-width:22px; }
+.q-hint { font-size:11px; color:var(--muted); margin-top:8px; line-height:1.55; }
+
+/* INPUTS */
+input[type=text], input[type=email], select, textarea {
+  width:100%; background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; color:var(--text); font-family:inherit; font-size:14px;
+  padding:13px 16px; outline:none; transition:border-color 0.2s, background 0.2s;
+  appearance:none; -webkit-appearance:none;
 }
-
-.progress-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.progress-count {
-  font-size: 11px;
-  font-weight: 700;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.progress-track {
-  height: 2px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--grad);
-  border-radius: 99px;
-  transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  width: 0%;
-}
-
-/* ── SECTIONS ── */
-.section { margin-bottom: 52px; }
-
-.section-head {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 32px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.section-num {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background: var(--badge-bg);
-  border: 1px solid rgba(0,210,255,0.25);
-  border-radius: 6px;
-  padding: 4px 10px;
-  color: var(--cyan);
-  -webkit-text-fill-color: var(--cyan);
-}
-
-.section-title {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-}
-
-/* ── QUESTION ── */
-.q {
-  margin-bottom: 36px;
-  animation: fadeUp 0.35s ease both;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.q-text {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.55;
-  color: rgba(255,255,255,0.90);
-  margin-bottom: 14px;
-  display: flex;
-  gap: 10px;
-}
-
-.q-n {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 400;
-  padding-top: 2px;
-  min-width: 22px;
-}
-
-.q-hint {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 8px;
-  line-height: 1.55;
-}
-
-/* ── INPUTS ── */
-input[type=text],
-input[type=email],
-select,
-textarea {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 13px 16px;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-input[type=text]::placeholder,
-input[type=email]::placeholder,
-textarea::placeholder { color: var(--muted); }
-
-input[type=text]:focus,
-input[type=email]:focus,
-select:focus,
-textarea:focus {
-  border-color: rgba(0,210,255,0.5);
-  background: rgba(0,210,255,0.04);
-}
-
-textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
-
+input[type=text]::placeholder, input[type=email]::placeholder, textarea::placeholder { color:var(--muted); }
+input[type=text]:focus, input[type=email]:focus, select:focus, textarea:focus { border-color:rgba(0,210,255,0.5); background:rgba(0,210,255,0.04); }
+textarea { resize:vertical; min-height:88px; line-height:1.6; }
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 40px;
-  cursor: pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.35)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 14px center; padding-right:40px; cursor:pointer;
 }
+select option { background:#12121F; color:#fff; }
 
-select option { background: #12121F; color: #fff; }
+/* PILLS */
+.pills { display:flex; flex-wrap:wrap; gap:8px; }
+.pills input { display:none; }
+.pills label { cursor:pointer; }
+.pills span { display:block; font-size:13px; font-weight:500; color:var(--muted); background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:9px 16px; transition:all 0.15s; user-select:none; }
+.pills label:hover span { background:var(--surface-hover); border-color:var(--border-hover); color:rgba(255,255,255,0.85); }
+.pills input:checked + span { background:rgba(0,210,255,0.08); border-color:rgba(0,210,255,0.45); color:var(--cyan); }
 
-/* ── PILLS ── */
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+/* SCALE */
+.scale-row { display:flex; gap:6px; }
+.scale-btn { flex:1; height:40px; background:var(--surface); border:1px solid var(--border); border-radius:8px; color:var(--muted); font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.15s; }
+.scale-btn:hover { background:var(--surface-hover); border-color:var(--border-hover); color:rgba(255,255,255,0.85); }
+.scale-btn.on { background:rgba(0,210,255,0.08); border-color:rgba(0,210,255,0.45); color:var(--cyan); }
+.scale-ends { display:flex; justify-content:space-between; margin-top:6px; }
+.scale-ends span { font-size:11px; color:var(--muted); }
 
-.pills input { display: none; }
+.div { border:none; border-top:1px solid var(--border); margin:48px 0; }
 
-.pills label { cursor: pointer; }
+/* SUBMIT */
+.submit-area { display:flex; flex-direction:column; gap:16px; align-items:flex-start; padding-top:8px; }
+.submit-note { font-size:12px; color:var(--muted); line-height:1.6; }
+.btn-submit { font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:var(--btn-grad); border:none; border-radius:10px; padding:15px 40px; cursor:pointer; transition:opacity 0.2s, transform 0.15s; }
+.btn-submit:hover { opacity:0.9; }
+.btn-submit:active { transform:scale(0.98); }
 
-.pills span {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px 16px;
-  transition: all 0.15s;
-  user-select: none;
-}
+/* SUCCESS */
+#success { display:none; flex-direction:column; align-items:center; text-align:center; padding:80px 24px 40px; gap:20px; }
+#success.show { display:flex; }
+.success-glyph { width:72px; height:72px; background:rgba(0,210,255,0.08); border:1px solid rgba(0,210,255,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; }
+#success h2 { font-size:36px; font-weight:900; letter-spacing:-0.03em; line-height:1.1; }
+#success h2 .grad { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+#success p { font-size:14px; color:var(--muted); line-height:1.7; max-width:400px; }
 
-.pills label:hover span {
-  background: var(--surface-hover);
-  border-color: var(--border-hover);
-  color: rgba(255,255,255,0.85);
-}
+.ghost { display:none; }
 
-.pills input:checked + span {
-  background: rgba(0,210,255,0.08);
-  border-color: rgba(0,210,255,0.45);
-  color: var(--cyan);
-}
-
-/* ── SCALE ── */
-.scale-row {
-  display: flex;
-  gap: 6px;
-}
-
-.scale-btn {
-  flex: 1;
-  height: 40px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--muted);
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.scale-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-hover);
-  color: rgba(255,255,255,0.85);
-}
-
-.scale-btn.on {
-  background: rgba(0,210,255,0.08);
-  border-color: rgba(0,210,255,0.45);
-  color: var(--cyan);
-}
-
-.scale-ends {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 6px;
-}
-
-.scale-ends span {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* ── DIVIDER ── */
-.div {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 48px 0;
-}
-
-/* ── SUBMIT ── */
-.submit-area {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
-  padding-top: 8px;
-}
-
-.submit-note {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.btn-submit {
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: #fff;
-  background: var(--btn-grad);
-  border: none;
-  border-radius: 10px;
-  padding: 15px 40px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: opacity 0.2s, transform 0.15s;
-}
-
-.btn-submit:hover { opacity: 0.92; }
-.btn-submit:active { transform: scale(0.98); }
-
-/* ── SUCCESS ── */
-#success {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 80px 24px 40px;
-  gap: 20px;
-}
-
-#success.show { display: flex; }
-
-.success-glyph {
-  width: 72px; height: 72px;
-  background: rgba(0,210,255,0.08);
-  border: 1px solid rgba(0,210,255,0.3);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 30px;
-}
-
-#success h2 {
-  font-size: 36px;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-#success h2 .grad {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-#success p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 400px;
-}
-
-.btn-dl {
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--cyan);
-  background: rgba(0,210,255,0.07);
-  border: 1px solid rgba(0,210,255,0.3);
-  border-radius: 8px;
-  padding: 11px 24px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-dl:hover { background: rgba(0,210,255,0.12); }
-
-/* ── NETLIFY hidden form trick ── */
-.hidden-form { display: none; }
-
-@media (max-width: 480px) {
-  .hero h1 { font-size: 34px; }
-  .scale-btn { height: 36px; font-size: 12px; }
-  .pills span { font-size: 12px; padding: 8px 13px; }
+@media (max-width:480px) {
+  .hero h1 { font-size:30px; }
+  .scale-btn { height:36px; font-size:12px; }
+  .pills span { font-size:12px; padding:8px 11px; }
+  .lang-btn { font-size:10px; padding:5px 7px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Ambient -->
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 
-<!-- Netlify pre-render form (required trick for SPA-style submit) -->
-<form name="creator-research" netlify netlify-honeypot="bot-field" class="hidden-form">
-  <input name="bot-field">
-  <input name="q1"><input name="q2"><input name="q3"><input name="q4">
-  <input name="q5"><input name="q6"><input name="q7"><input name="q8">
-  <input name="q9"><input name="q10"><input name="q11"><input name="q12">
-  <input name="q13"><input name="q14"><input name="q15"><input name="q16">
-  <input name="q17"><input name="q18"><input name="q19"><input name="q20">
-  <input name="q21"><input name="q22"><input name="q23"><input name="q24">
-  <input name="q25"><input name="q26"><input name="q27"><input name="q28">
+<!-- Netlify ghost form for build-time detection -->
+<form name="creator-research" netlify netlify-honeypot="bot-field" class="ghost">
+  <input name="bot-field"><input name="lang">
+  <input name="q1"><input name="q2"><input name="q3"><input name="q4"><input name="q5">
+  <input name="q6"><input name="q7"><input name="q8"><input name="q9"><input name="q10">
+  <input name="q11"><input name="q12"><input name="q13"><input name="q14"><input name="q15">
+  <input name="q16"><input name="q17"><input name="q18"><input name="q19"><input name="q20">
+  <input name="q21"><input name="q22"><input name="q23"><input name="q24"><input name="q25">
+  <input name="q26"><input name="q27"><input name="q28">
 </form>
 
 <div class="wrap">
 
-  <!-- NAV -->
   <nav>
-    <a href="https://flowstate1231.netlify.app/" class="nav-logo" target="_blank" rel="noopener">
+    <a href="https://flowstate1231.netlify.app/" class="nav-left" target="_blank" rel="noopener">
       <div class="logo-icon">
         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 16L10 4L16 16M7 11.5H13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -545,468 +185,340 @@ select option { background: #12121F; color: #fff; }
       </div>
       <span class="logo-wordmark">FlowState</span>
     </a>
-    <span class="nav-badge">Research · Beta</span>
+    <div class="lang-selector" role="group">
+      <button class="lang-btn active" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="it">IT</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="pt">PT</button>
+    </div>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
-    <div class="hero-eyebrow">Fintech para la economía de creadores</div>
-    <h1>Tu voz da forma<br>a <span class="grad">nuestro producto</span></h1>
-    <p>Estamos construyendo la infraestructura financiera que los creators merecen. Esta entrevista toma 6–8 minutos y cada respuesta impacta directamente en lo que construimos.</p>
+    <div class="hero-eyebrow" id="h-eyebrow"></div>
+    <h1 id="h-title"></h1>
+    <p id="h-sub"></p>
   </div>
 
-  <!-- PROGRESS -->
   <div class="progress-sticky">
     <div class="progress-meta">
-      <span class="progress-label">Progreso</span>
-      <span class="progress-count" id="pct">0 / 28</span>
+      <span class="progress-label" id="prog-label"></span>
+      <span class="progress-count" id="prog-count">0 / 28</span>
     </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="bar"></div>
-    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-bar"></div></div>
   </div>
 
-  <!-- FORM -->
   <form id="main-form" novalidate>
     <input type="hidden" name="form-name" value="creator-research">
+    <input type="hidden" name="lang" id="field-lang" value="es">
     <p style="display:none"><input name="bot-field"></p>
 
-    <!-- 01 -->
     <div class="section">
-      <div class="section-head">
-        <span class="section-num">01</span>
-        <span class="section-title">Perfil del creator</span>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">1.</span><span>¿Cómo te identificás como creator?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q1" value="UGC / Nano"><span>UGC / Nano</span></label>
-          <label><input type="radio" name="q1" value="Micro (<100k)"><span>Micro (&lt;100k)</span></label>
-          <label><input type="radio" name="q1" value="Mid (100k–1M)"><span>Mid (100k–1M)</span></label>
-          <label><input type="radio" name="q1" value="Macro (+1M)"><span>Macro (+1M)</span></label>
-          <label><input type="radio" name="q1" value="Marca / empresa"><span>Marca / empresa</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">2.</span><span>¿En qué plataformas generás ingresos principalmente? (múltiple)</span></div>
-        <div class="pills">
-          <label><input type="checkbox" name="q2" value="Instagram"><span>Instagram</span></label>
-          <label><input type="checkbox" name="q2" value="TikTok"><span>TikTok</span></label>
-          <label><input type="checkbox" name="q2" value="YouTube"><span>YouTube</span></label>
-          <label><input type="checkbox" name="q2" value="Twitch"><span>Twitch</span></label>
-          <label><input type="checkbox" name="q2" value="Newsletter"><span>Newsletter</span></label>
-          <label><input type="checkbox" name="q2" value="Podcast"><span>Podcast</span></label>
-          <label><input type="checkbox" name="q2" value="LinkedIn"><span>LinkedIn</span></label>
-          <label><input type="checkbox" name="q2" value="Otro"><span>Otro</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">3.</span><span>¿En qué país/región operás principalmente?</span></div>
-        <select name="q3">
-          <option value="">— Seleccioná —</option>
-          <option>España</option><option>Argentina</option><option>México</option>
-          <option>Colombia</option><option>Chile</option><option>Otro LATAM</option><option>Otro Europa</option>
-        </select>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">4.</span><span>¿Qué porcentaje de tus ingresos viene de colaboraciones con marcas?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q4" value="<20%"><span>Menos del 20%</span></label>
-          <label><input type="radio" name="q4" value="20–50%"><span>20–50%</span></label>
-          <label><input type="radio" name="q4" value="50–80%"><span>50–80%</span></label>
-          <label><input type="radio" name="q4" value=">80%"><span>Más del 80%</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">5.</span><span>¿Cuál es tu ingreso mensual promedio por contenido patrocinado?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q5" value="<€500"><span>Menos de €500</span></label>
-          <label><input type="radio" name="q5" value="€500–€2k"><span>€500–€2.000</span></label>
-          <label><input type="radio" name="q5" value="€2k–€10k"><span>€2.000–€10.000</span></label>
-          <label><input type="radio" name="q5" value="€10k–€50k"><span>€10.000–€50.000</span></label>
-          <label><input type="radio" name="q5" value=">€50k"><span>Más de €50.000</span></label>
-        </div>
-      </div>
+      <div class="section-head"><span class="section-num">01</span><span class="section-title" id="s1-title"></span></div>
+      <div class="q"><div class="q-text"><span class="q-n">1.</span><span id="q1-text"></span></div><div class="pills" id="q1-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">2.</span><span id="q2-text"></span></div><div class="pills" id="q2-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">3.</span><span id="q3-text"></span></div><select name="q3" id="q3-sel"></select></div>
+      <div class="q"><div class="q-text"><span class="q-n">4.</span><span id="q4-text"></span></div><div class="pills" id="q4-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">5.</span><span id="q5-text"></span></div><div class="pills" id="q5-pills"></div></div>
     </div>
 
     <hr class="div">
 
-    <!-- 02 -->
     <div class="section">
-      <div class="section-head">
-        <span class="section-num">02</span>
-        <span class="section-title">Dolor financiero actual</span>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">6.</span><span>¿Cuánto tiempo pasa entre que entregás un trabajo y que cobrás?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q6" value="<15 días"><span>Menos de 15 días</span></label>
-          <label><input type="radio" name="q6" value="15–30 días"><span>15–30 días</span></label>
-          <label><input type="radio" name="q6" value="30–60 días"><span>30–60 días</span></label>
-          <label><input type="radio" name="q6" value="60–90 días"><span>60–90 días</span></label>
-          <label><input type="radio" name="q6" value=">90 días"><span>Más de 90 días</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">7.</span><span>¿Rechazaste alguna vez una inversión (equipo, producción, viaje) por falta de liquidez en el momento?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q7" value="Sí, varias veces"><span>Sí, varias veces</span></label>
-          <label><input type="radio" name="q7" value="Sí, alguna vez"><span>Sí, alguna vez</span></label>
-          <label><input type="radio" name="q7" value="No, nunca"><span>No, nunca</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">8.</span><span>¿Cómo gestionás hoy el gap entre ejecución y cobro?</span></div>
-        <textarea name="q8" placeholder="Contame con tus palabras..."></textarea>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">9.</span><span>¿Intentaste obtener crédito bancario para financiar tu operación como creator?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q9" value="Sí, lo obtuve"><span>Sí, lo obtuve</span></label>
-          <label><input type="radio" name="q9" value="Sí, me rechazaron"><span>Sí, me rechazaron</span></label>
-          <label><input type="radio" name="q9" value="No lo intenté"><span>No lo intenté</span></label>
-          <label><input type="radio" name="q9" value="No lo necesité"><span>No lo necesité</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">10.</span><span>Si te rechazaron o no intentaste, ¿por qué? (múltiple)</span></div>
-        <div class="pills">
-          <label><input type="checkbox" name="q10" value="Sin historial crediticio"><span>Sin historial crediticio</span></label>
-          <label><input type="checkbox" name="q10" value="Ingresos variables"><span>Ingresos variables</span></label>
-          <label><input type="checkbox" name="q10" value="No sabía cómo"><span>No sabía cómo</span></label>
-          <label><input type="checkbox" name="q10" value="Desconfianza en bancos"><span>Desconfianza en bancos</span></label>
-          <label><input type="checkbox" name="q10" value="Demasiados trámites"><span>Demasiados trámites</span></label>
-          <label><input type="checkbox" name="q10" value="No aplica"><span>No aplica</span></label>
-        </div>
-      </div>
+      <div class="section-head"><span class="section-num">02</span><span class="section-title" id="s2-title"></span></div>
+      <div class="q"><div class="q-text"><span class="q-n">6.</span><span id="q6-text"></span></div><div class="pills" id="q6-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">7.</span><span id="q7-text"></span></div><div class="pills" id="q7-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">8.</span><span id="q8-text"></span></div><textarea name="q8" id="q8-ta"></textarea></div>
+      <div class="q"><div class="q-text"><span class="q-n">9.</span><span id="q9-text"></span></div><div class="pills" id="q9-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">10.</span><span id="q10-text"></span></div><div class="pills" id="q10-pills"></div></div>
     </div>
 
     <hr class="div">
 
-    <!-- 03 -->
     <div class="section">
-      <div class="section-head">
-        <span class="section-num">03</span>
-        <span class="section-title">Tarjeta & adelanto de cobros</span>
-      </div>
-
+      <div class="section-head"><span class="section-num">03</span><span class="section-title" id="s3-title"></span></div>
+      <div class="q"><div class="q-text"><span class="q-n">11.</span><span id="q11-text"></span></div><div class="pills" id="q11-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">12.</span><span id="q12-text"></span></div><div class="pills" id="q12-pills"></div></div>
       <div class="q">
-        <div class="q-text"><span class="q-n">11.</span><span>Si pudieras adelantar el cobro de un contrato ya firmado con una marca (por un fee pequeño), ¿lo usarías?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q11" value="Sí, casi siempre"><span>Sí, casi siempre</span></label>
-          <label><input type="radio" name="q11" value="Sí, a veces"><span>Sí, a veces</span></label>
-          <label><input type="radio" name="q11" value="Depende del fee"><span>Depende del fee</span></label>
-          <label><input type="radio" name="q11" value="No, prefiero esperar"><span>No, prefiero esperar</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">12.</span><span>¿Qué fee máximo pagarías para cobrar un contrato de €5.000 en 48h en vez de 60 días?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q12" value="Hasta 2% (€100)"><span>Hasta 2% (€100)</span></label>
-          <label><input type="radio" name="q12" value="2–5% (€100–250)"><span>2–5% (€100–250)</span></label>
-          <label><input type="radio" name="q12" value="5–8% (€250–400)"><span>5–8% (€250–400)</span></label>
-          <label><input type="radio" name="q12" value=">8%"><span>Más del 8%</span></label>
-          <label><input type="radio" name="q12" value="No lo usaría"><span>No lo usaría</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">13.</span><span>¿Cuánto valor le darías a una tarjeta con límite atado a tus contratos firmados, no a tu historial bancario?</span></div>
+        <div class="q-text"><span class="q-n">13.</span><span id="q13-text"></span></div>
         <div class="scale-row" id="sc13"></div>
-        <div class="scale-ends"><span>Ninguno</span><span>Muchísimo</span></div>
+        <div class="scale-ends"><span id="sc13-lo"></span><span id="sc13-hi"></span></div>
         <input type="hidden" name="q13" id="v13">
       </div>
-
+      <div class="q"><div class="q-text"><span class="q-n">14.</span><span id="q14-text"></span></div><div class="pills" id="q14-pills"></div></div>
       <div class="q">
-        <div class="q-text"><span class="q-n">14.</span><span>¿En qué gastarías principalmente esa tarjeta? (múltiple)</span></div>
-        <div class="pills">
-          <label><input type="checkbox" name="q14" value="Equipo / tecnología"><span>Equipo / tecnología</span></label>
-          <label><input type="checkbox" name="q14" value="Producción de contenido"><span>Producción de contenido</span></label>
-          <label><input type="checkbox" name="q14" value="Viajes / eventos"><span>Viajes / eventos</span></label>
-          <label><input type="checkbox" name="q14" value="Publicidad pagada"><span>Publicidad pagada</span></label>
-          <label><input type="checkbox" name="q14" value="Equipo humano"><span>Equipo humano</span></label>
-          <label><input type="checkbox" name="q14" value="Software / suscripciones"><span>Software / suscripciones</span></label>
-          <label><input type="checkbox" name="q14" value="Lifestyle / personal"><span>Lifestyle / personal</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">15.</span><span>¿Qué tan importante es que la tarjeta refleje tu identidad como creator?</span></div>
+        <div class="q-text"><span class="q-n">15.</span><span id="q15-text"></span></div>
         <div class="scale-row" id="sc15"></div>
-        <div class="scale-ends"><span>No importa</span><span>Muy importante</span></div>
+        <div class="scale-ends"><span id="sc15-lo"></span><span id="sc15-hi"></span></div>
         <input type="hidden" name="q15" id="v15">
       </div>
     </div>
 
     <hr class="div">
 
-    <!-- 04 -->
     <div class="section">
-      <div class="section-head">
-        <span class="section-num">04</span>
-        <span class="section-title">Ecosistema 360°</span>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">16.</span><span>¿Cuáles de estos servicios te generarían más valor en un mismo ecosistema? (múltiple)</span></div>
-        <div class="pills">
-          <label><input type="checkbox" name="q16" value="Marketplace de campañas"><span>Marketplace de campañas</span></label>
-          <label><input type="checkbox" name="q16" value="Contabilidad / gestoría"><span>Contabilidad / gestoría</span></label>
-          <label><input type="checkbox" name="q16" value="Contratos legales"><span>Contratos legales</span></label>
-          <label><input type="checkbox" name="q16" value="Seguro de campañas"><span>Seguro de campañas</span></label>
-          <label><input type="checkbox" name="q16" value="Seguro de equipos"><span>Seguro de equipos</span></label>
-          <label><input type="checkbox" name="q16" value="Analytics de ingresos"><span>Analytics de ingresos</span></label>
-          <label><input type="checkbox" name="q16" value="Herramientas de IA"><span>Herramientas de IA</span></label>
-          <label><input type="checkbox" name="q16" value="Coaching / mentoría"><span>Coaching / mentoría</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">17.</span><span>¿Pagarías una suscripción mensual para acceder a todo el ecosistema?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q17" value="Sí"><span>Sí</span></label>
-          <label><input type="radio" name="q17" value="Depende del precio"><span>Depende del precio</span></label>
-          <label><input type="radio" name="q17" value="Prefiero pay-per-use"><span>Prefiero pagar por uso</span></label>
-          <label><input type="radio" name="q17" value="No"><span>No</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">18.</span><span>¿Cuánto pagarías por un plan premium mensual (tarjeta + adelantos + servicios)?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q18" value="Solo si es gratis"><span>Solo si es gratis</span></label>
-          <label><input type="radio" name="q18" value="Hasta €20/mes"><span>Hasta €20/mes</span></label>
-          <label><input type="radio" name="q18" value="€20–€50/mes"><span>€20–€50/mes</span></label>
-          <label><input type="radio" name="q18" value="€50–€100/mes"><span>€50–€100/mes</span></label>
-          <label><input type="radio" name="q18" value=">€100/mes"><span>Más de €100/mes</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">19.</span><span>¿Tenés actualmente seguro que cubra tus equipos de trabajo (cámaras, laptop, drones)?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q19" value="Sí, cubierto"><span>Sí, cubierto</span></label>
-          <label><input type="radio" name="q19" value="Parcialmente"><span>Parcialmente</span></label>
-          <label><input type="radio" name="q19" value="No, pero lo buscaría"><span>No, pero lo buscaría</span></label>
-          <label><input type="radio" name="q19" value="No me interesa"><span>No me interesa</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">20.</span><span>Si una marca cancela o no paga una campaña ya ejecutada, ¿cómo lo resolvés?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q20" value="Reclamo legal"><span>Reclamo legal</span></label>
-          <label><input type="radio" name="q20" value="Negocio directo"><span>Negocio directo</span></label>
-          <label><input type="radio" name="q20" value="Lo gestiona mi agencia"><span>Lo gestiona mi agencia</span></label>
-          <label><input type="radio" name="q20" value="Generalmente lo pierdo"><span>Generalmente lo pierdo</span></label>
-          <label><input type="radio" name="q20" value="No me ha pasado"><span>No me ha pasado</span></label>
-        </div>
-      </div>
+      <div class="section-head"><span class="section-num">04</span><span class="section-title" id="s4-title"></span></div>
+      <div class="q"><div class="q-text"><span class="q-n">16.</span><span id="q16-text"></span></div><div class="pills" id="q16-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">17.</span><span id="q17-text"></span></div><div class="pills" id="q17-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">18.</span><span id="q18-text"></span></div><div class="pills" id="q18-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">19.</span><span id="q19-text"></span></div><div class="pills" id="q19-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">20.</span><span id="q20-text"></span></div><div class="pills" id="q20-pills"></div></div>
     </div>
 
     <hr class="div">
 
-    <!-- 05 -->
     <div class="section">
-      <div class="section-head">
-        <span class="section-num">05</span>
-        <span class="section-title">Marketplace & deals</span>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">21.</span><span>¿Cómo conseguís hoy tus colaboraciones con marcas? (múltiple)</span></div>
-        <div class="pills">
-          <label><input type="checkbox" name="q21" value="DMs directos"><span>DMs directos</span></label>
-          <label><input type="checkbox" name="q21" value="Agencia representante"><span>Agencia representante</span></label>
-          <label><input type="checkbox" name="q21" value="Plataformas (Influencity, etc.)"><span>Plataformas (Influencity, etc.)</span></label>
-          <label><input type="checkbox" name="q21" value="Red propia / referidos"><span>Red propia / referidos</span></label>
-          <label><input type="checkbox" name="q21" value="Las marcas me contactan"><span>Las marcas me contactan</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">22.</span><span>¿Usarías un marketplace integrado en la app para descubrir campañas activas?</span></div>
-        <div class="pills">
-          <label><input type="radio" name="q22" value="Sí, muy activamente"><span>Sí, muy activamente</span></label>
-          <label><input type="radio" name="q22" value="Sí, a veces"><span>Sí, a veces</span></label>
-          <label><input type="radio" name="q22" value="Dependería de las marcas"><span>Dependería de las marcas</span></label>
-          <label><input type="radio" name="q22" value="No"><span>No</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">23.</span><span>¿Qué categorías de marcas te interesan más? (múltiple)</span></div>
-        <div class="pills">
-          <label><input type="checkbox" name="q23" value="Lifestyle / Fashion"><span>Lifestyle / Fashion</span></label>
-          <label><input type="checkbox" name="q23" value="Tech / Apps"><span>Tech / Apps</span></label>
-          <label><input type="checkbox" name="q23" value="Fintech / Bancos"><span>Fintech / Bancos</span></label>
-          <label><input type="checkbox" name="q23" value="Viajes / Hospitalidad"><span>Viajes / Hospitalidad</span></label>
-          <label><input type="checkbox" name="q23" value="Alimentación / Wellness"><span>Alimentación / Wellness</span></label>
-          <label><input type="checkbox" name="q23" value="Gaming / Entretenimiento"><span>Gaming</span></label>
-          <label><input type="checkbox" name="q23" value="Beauty / Skincare"><span>Beauty / Skincare</span></label>
-          <label><input type="checkbox" name="q23" value="Software B2B"><span>Software B2B</span></label>
-        </div>
-      </div>
+      <div class="section-head"><span class="section-num">05</span><span class="section-title" id="s5-title"></span></div>
+      <div class="q"><div class="q-text"><span class="q-n">21.</span><span id="q21-text"></span></div><div class="pills" id="q21-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">22.</span><span id="q22-text"></span></div><div class="pills" id="q22-pills"></div></div>
+      <div class="q"><div class="q-text"><span class="q-n">23.</span><span id="q23-text"></span></div><div class="pills" id="q23-pills"></div></div>
     </div>
 
     <hr class="div">
 
-    <!-- 06 -->
     <div class="section">
-      <div class="section-head">
-        <span class="section-num">06</span>
-        <span class="section-title">Comportamiento & cierre</span>
-      </div>
-
+      <div class="section-head"><span class="section-num">06</span><span class="section-title" id="s6-title"></span></div>
+      <div class="q"><div class="q-text"><span class="q-n">24.</span><span id="q24-text"></span></div><input type="text" name="q24" id="q24-in"></div>
       <div class="q">
-        <div class="q-text"><span class="q-n">24.</span><span>¿Qué app financiera usás actualmente?</span></div>
-        <input type="text" name="q24" placeholder="Ej: Revolut, BBVA, Mercado Pago, ninguna...">
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">25.</span><span>¿Cuánto confías en los bancos tradicionales para entender tus necesidades como creator?</span></div>
+        <div class="q-text"><span class="q-n">25.</span><span id="q25-text"></span></div>
         <div class="scale-row" id="sc25"></div>
-        <div class="scale-ends"><span>Nada</span><span>Mucho</span></div>
+        <div class="scale-ends"><span id="sc25-lo"></span><span id="sc25-hi"></span></div>
         <input type="hidden" name="q25" id="v25">
       </div>
-
+      <div class="q"><div class="q-text"><span class="q-n">26.</span><span id="q26-text"></span></div><textarea name="q26" id="q26-ta"></textarea></div>
+      <div class="q"><div class="q-text"><span class="q-n">27.</span><span id="q27-text"></span></div><textarea name="q27" id="q27-ta"></textarea></div>
       <div class="q">
-        <div class="q-text"><span class="q-n">26.</span><span>¿Cuál es el mayor dolor en tu vida financiera como creator hoy?</span></div>
-        <textarea name="q26" placeholder="Sin filtros..."></textarea>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">27.</span><span>Si existiera la solución financiera perfecta para creators, ¿cómo sería?</span></div>
-        <textarea name="q27" placeholder="Sueña en voz alta..."></textarea>
-      </div>
-
-      <div class="q">
-        <div class="q-text"><span class="q-n">28.</span><span> Agregarías alguna feature en especial a nuestro ecosistema? (opcional)</span></div>
-        <input type="email" name="q28" placeholder="tu@email.com">
-        <p class="q-hint">No hace falta que respondas esta pregunta, pero si lo haces, nos la tomaremos muy en serio</p>
+        <div class="q-text"><span class="q-n">28.</span><span id="q28-text"></span></div>
+        <input type="email" name="q28" id="q28-in">
+        <p class="q-hint" id="q28-hint"></p>
       </div>
     </div>
 
     <div class="submit-area">
-      <p class="submit-note">Tus respuestas son anónimas y se usan exclusivamente para diseño de producto.<br>Tiempo estimado: 6–8 minutos.</p>
-      <button type="submit" class="btn-submit">Enviar entrevista →</button>
+      <p class="submit-note" id="submit-note"></p>
+      <button type="submit" class="btn-submit" id="submit-btn"></button>
     </div>
-
   </form>
 
-  <!-- SUCCESS -->
   <div id="success">
     <div class="success-glyph">✦</div>
-    <h2>Gracias,<br><span class="grad">en serio.</span></h2>
-    <p>Cada respuesta da forma a algo que nunca existió para los creators. Cuando lancemos, sos de los primeros.</p>
-    <button class="btn-dl" id="dl-btn">Descargar mis respuestas (.json)</button>
+    <h2 id="success-title"></h2>
+    <p id="success-sub"></p>
   </div>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
-// ── Scales ──
-function mkScale(wrId, hidId, n) {
-  const wr = document.getElementById(wrId);
-  for (let i = 1; i <= n; i++) {
+const T = {
+  es: {
+    eyebrow:"Fintech para la economía de creadores",
+    heroTitle:"Tu voz da forma a <span class='grad'>nuestro producto</span>",
+    heroSub:"Estamos construyendo la infraestructura financiera que los creators merecen. Esta entrevista toma 6–8 minutos y cada respuesta impacta directamente en lo que construimos.",
+    progLabel:"Progreso",
+    s:["Perfil del creator","Dolor financiero actual","Tarjeta y adelanto de cobros","Ecosistema 360°","Marketplace y deals","Cierre"],
+    q:["¿Cómo te identificas como creator?","¿En qué plataformas generas ingresos principalmente? (múltiple)","¿En qué país o región operas principalmente?","¿Qué porcentaje de tus ingresos proviene de colaboraciones con marcas?","¿Cuál es tu ingreso mensual promedio por contenido patrocinado?","¿Cuánto tiempo pasa entre que entregas un trabajo y que cobras?","¿Has rechazado alguna vez una inversión (equipo, producción, viaje) por falta de liquidez en ese momento?","¿Cómo gestionas hoy el gap entre ejecución y cobro?","¿Has intentado obtener crédito bancario para financiar tu operación como creator?","Si te rechazaron o no lo intentaste, ¿por qué? (múltiple)","Si pudieras adelantar el cobro de un contrato ya firmado con una marca por un fee pequeño, ¿lo usarías?","¿Qué fee máximo pagarías para cobrar un contrato de €5.000 en 48h en vez de 60 días?","¿Cuánto valor le darías a una tarjeta con límite atado a tus contratos firmados, no a tu historial bancario?","¿En qué gastarías principalmente esa tarjeta? (múltiple)","¿Qué tan importante es que la tarjeta refleje tu identidad como creator?","¿Cuáles de estos servicios te generarían más valor en un mismo ecosistema? (múltiple)","¿Pagarías una suscripción mensual para acceder a todo el ecosistema?","¿Cuánto pagarías por un plan premium mensual (tarjeta + adelantos + servicios)?","¿Tienes actualmente seguro que cubra tus equipos de trabajo (cámaras, laptop, drones)?","Si una marca cancela o no paga una campaña ya ejecutada, ¿cómo lo resuelves?","¿Cómo consigues hoy tus colaboraciones con marcas? (múltiple)","¿Usarías un marketplace integrado en la app para descubrir campañas activas?","¿Qué categorías de marcas te interesan más? (múltiple)","¿Qué app financiera usas actualmente?","¿Cuánto confías en los bancos tradicionales para entender tus necesidades como creator?","¿Cuál es el mayor dolor en tu vida financiera como creator hoy?","Si existiera la solución financiera perfecta para creators, ¿cómo sería?","¿Quieres que te avisemos cuando lancemos? (opcional)"],
+    q3o:["— Seleccionar —","España","Argentina","México","Colombia","Chile","Otro LATAM","Otro Europa","Otro"],
+    o:{q1:["UGC / Nano","Micro (<100k)","Mid (100k–1M)","Macro (+1M)","Marca / empresa"],q2:["Instagram","TikTok","YouTube","Twitch","Newsletter","Podcast","LinkedIn","Otro"],q4:["Menos del 20%","20–50%","50–80%","Más del 80%"],q5:["Menos de €500","€500–€2.000","€2.000–€10.000","€10.000–€50.000","Más de €50.000"],q6:["Menos de 15 días","15–30 días","30–60 días","60–90 días","Más de 90 días"],q7:["Sí, varias veces","Sí, alguna vez","No, nunca"],q9:["Sí, lo obtuve","Sí, me rechazaron","No lo intenté","No lo necesité"],q10:["Sin historial crediticio","Ingresos variables","No sabía cómo","Desconfianza en bancos","Demasiados trámites","No aplica"],q11:["Sí, casi siempre","Sí, a veces","Depende del fee","No, prefiero esperar"],q12:["Hasta 2% (€100)","2–5% (€100–250)","5–8% (€250–400)","Más del 8%","No lo usaría"],q14:["Equipo / tecnología","Producción de contenido","Viajes / eventos","Publicidad pagada","Equipo humano","Software / suscripciones","Lifestyle / personal"],q16:["Marketplace de campañas","Contabilidad / gestoría","Contratos legales","Seguro de campañas","Seguro de equipos","Analytics de ingresos","Herramientas de IA","Coaching / mentoría"],q17:["Sí","Depende del precio","Prefiero pagar por uso","No"],q18:["Solo si es gratis","Hasta €20/mes","€20–€50/mes","€50–€100/mes","Más de €100/mes"],q19:["Sí, cubierto","Parcialmente","No, pero lo buscaría","No me interesa"],q20:["Reclamo legal","Negociación directa","Lo gestiona mi agencia","Generalmente lo pierdo","No me ha pasado"],q21:["DMs directos","Agencia representante","Plataformas (Influencity, etc.)","Red propia / referidos","Las marcas me contactan"],q22:["Sí, muy activamente","Sí, a veces","Dependería de las marcas","No"],q23:["Lifestyle / Fashion","Tech / Apps","Fintech / Bancos","Viajes / Hospitalidad","Alimentación / Wellness","Gaming","Beauty / Skincare","Software B2B"]},
+    sc:{q13:["Ninguno","Muchísimo"],q15:["No importa","Muy importante"],q25:["Nada","Mucho"]},
+    ph:{q8:"Cuéntanos con tus palabras...",q24:"Ej: Revolut, BBVA, Mercado Pago, ninguna...",q26:"Sin filtros...",q27:"Sueña en voz alta...",q28:"tu@email.com"},
+    q28hint:"Sin spam. Un solo mensaje cuando abramos acceso anticipado.",
+    submitNote:"Tus respuestas son anónimas y se usan exclusivamente para diseño de producto. Tiempo estimado: 6–8 minutos.",
+    submitBtn:"Enviar entrevista →",
+    successTitle:"Gracias, <span class='grad'>de verdad.</span>",
+    successSub:"Cada respuesta da forma a algo que nunca existió para los creators. Cuando lancemos, serás de los primeros."
+  },
+  en: {
+    eyebrow:"Fintech for the creator economy",
+    heroTitle:"Your voice shapes <span class='grad'>our product</span>",
+    heroSub:"We're building the financial infrastructure that creators deserve. This interview takes 6–8 minutes and every answer directly impacts what we build.",
+    progLabel:"Progress",
+    s:["Creator profile","Current financial pain","Card & payment advances","360° ecosystem","Marketplace & deals","Closing"],
+    q:["How do you identify as a creator?","On which platforms do you mainly earn income? (multiple)","In which country or region do you mainly operate?","What percentage of your income comes from brand collaborations?","What is your average monthly income from sponsored content?","How long does it take between delivering work and getting paid?","Have you ever turned down an investment (gear, production, travel) due to lack of liquidity at the time?","How do you currently manage the gap between delivery and payment?","Have you tried to get a bank loan to finance your creator operations?","If you were rejected or didn't try, why? (multiple)","If you could advance the payment on a signed brand contract for a small fee, would you use it?","What maximum fee would you pay to receive a €5,000 contract payment in 48h instead of 60 days?","How much value would you place on a card whose limit is tied to your signed contracts, not your credit history?","What would you mainly spend on with that card? (multiple)","How important is it that the card reflects your identity as a creator?","Which services would give you the most value in a single ecosystem? (multiple)","Would you pay a monthly subscription to access the full ecosystem?","How much would you pay for a premium monthly plan (card + advances + services)?","Do you currently have insurance covering your work equipment (cameras, laptop, drones)?","If a brand cancels or doesn't pay for a completed campaign, how do you handle it?","How do you currently get brand collaborations? (multiple)","Would you use an integrated marketplace in the app to discover active campaigns?","Which brand categories interest you the most? (multiple)","Which financial app do you currently use?","How much do you trust traditional banks to understand your needs as a creator?","What is your biggest financial pain point as a creator today?","If there were a perfect financial solution for creators, what would it look like?","Would you like us to notify you when we launch? (optional)"],
+    q3o:["— Select —","Spain","Argentina","Mexico","Colombia","Chile","Other LATAM","Other Europe","Other"],
+    o:{q1:["UGC / Nano","Micro (<100k)","Mid (100k–1M)","Macro (+1M)","Brand / company"],q2:["Instagram","TikTok","YouTube","Twitch","Newsletter","Podcast","LinkedIn","Other"],q4:["Less than 20%","20–50%","50–80%","More than 80%"],q5:["Less than €500","€500–€2,000","€2,000–€10,000","€10,000–€50,000","More than €50,000"],q6:["Less than 15 days","15–30 days","30–60 days","60–90 days","More than 90 days"],q7:["Yes, many times","Yes, once or twice","No, never"],q9:["Yes, I got it","Yes, I was rejected","I didn't try","I didn't need it"],q10:["No credit history","Variable income","Didn't know how","Distrust of banks","Too much paperwork","Not applicable"],q11:["Yes, almost always","Yes, sometimes","Depends on the fee","No, I prefer to wait"],q12:["Up to 2% (€100)","2–5% (€100–250)","5–8% (€250–400)","More than 8%","I wouldn't use it"],q14:["Equipment / technology","Content production","Travel / events","Paid advertising","Team / collaborators","Software / subscriptions","Lifestyle / personal"],q16:["Campaign marketplace","Accounting / bookkeeping","Legal contracts","Campaign insurance","Equipment insurance","Income analytics","AI tools","Coaching / mentorship"],q17:["Yes","Depends on price","Prefer pay-per-use","No"],q18:["Only if free","Up to €20/mo","€20–€50/mo","€50–€100/mo","More than €100/mo"],q19:["Yes, covered","Partially","No, but I'd look for it","Not interested"],q20:["Legal claim","Direct negotiation","My agency handles it","I usually lose it","It hasn't happened to me"],q21:["Direct DMs","Talent agency","Platforms (Influencity, etc.)","Own network / referrals","Brands contact me"],q22:["Yes, very actively","Yes, sometimes","Depends on the brands","No"],q23:["Lifestyle / Fashion","Tech / Apps","Fintech / Banking","Travel / Hospitality","Food / Wellness","Gaming","Beauty / Skincare","B2B Software"]},
+    sc:{q13:["None","Huge"],q15:["Doesn't matter","Very important"],q25:["Not at all","A lot"]},
+    ph:{q8:"Tell us in your own words...",q24:"E.g.: Revolut, Chase, PayPal, none...",q26:"No filter needed...",q27:"Dream out loud...",q28:"you@email.com"},
+    q28hint:"No spam. Just one message when we open early access.",
+    submitNote:"Your answers are anonymous and used exclusively for product design. Estimated time: 6–8 minutes.",
+    submitBtn:"Submit interview →",
+    successTitle:"Thank you, <span class='grad'>genuinely.</span>",
+    successSub:"Every answer shapes something that has never existed for creators. When we launch, you'll be among the first to know."
+  },
+  it: {
+    eyebrow:"Fintech per l'economia dei creator",
+    heroTitle:"La tua voce dà forma al <span class='grad'>nostro prodotto</span>",
+    heroSub:"Stiamo costruendo l'infrastruttura finanziaria che i creator meritano. Questa intervista richiede 6–8 minuti e ogni risposta impatta direttamente su ciò che costruiamo.",
+    progLabel:"Progresso",
+    s:["Profilo del creator","Difficoltà finanziarie attuali","Carta e anticipo dei pagamenti","Ecosistema 360°","Marketplace e deal","Chiusura"],
+    q:["Come ti identifichi come creator?","Su quali piattaforme guadagni principalmente? (multiplo)","In quale paese o regione operi principalmente?","Che percentuale dei tuoi guadagni proviene da collaborazioni con brand?","Qual è il tuo guadagno mensile medio da contenuti sponsorizzati?","Quanto tempo passa tra la consegna di un lavoro e il pagamento?","Hai mai rifiutato un investimento (attrezzatura, produzione, viaggi) per mancanza di liquidità in quel momento?","Come gestisci attualmente il gap tra consegna e pagamento?","Hai mai provato a ottenere credito bancario per finanziare la tua attività da creator?","Se sei stato rifiutato o non hai provato, perché? (multiplo)","Se potessi anticipare il pagamento di un contratto già firmato con un brand pagando una piccola commissione, lo useresti?","Quale commissione massima pagheresti per ricevere €5.000 in 48h invece di 60 giorni?","Quanto valore daresti a una carta il cui limite è legato ai tuoi contratti firmati, non alla tua storia creditizia?","Per cosa spenderesti principalmente quella carta? (multiplo)","Quanto è importante per te che la carta rifletta la tua identità come creator?","Quali di questi servizi ti darebbero più valore in un unico ecosistema? (multiplo)","Pagheresti un abbonamento mensile per accedere all'intero ecosistema?","Quanto pagheresti per un piano premium mensile (carta + anticipi + servizi)?","Hai attualmente un'assicurazione che copre le tue attrezzature di lavoro (telecamere, laptop, droni)?","Se un brand cancella o non paga una campagna già eseguita, come la gestisci?","Come ottieni attualmente le collaborazioni con i brand? (multiplo)","Useresti un marketplace integrato nell'app per scoprire campagne attive?","Quali categorie di brand ti interessano di più? (multiplo)","Quale app finanziaria usi attualmente?","Quanto ti fidi delle banche tradizionali per capire le tue esigenze come creator?","Qual è il tuo maggiore problema finanziario come creator oggi?","Se esistesse la soluzione finanziaria perfetta per i creator, come sarebbe?","Vuoi che ti avvisiamo quando lanciamo? (opzionale)"],
+    q3o:["— Seleziona —","Spagna","Argentina","Messico","Colombia","Cile","Altro LATAM","Altra Europa","Altro"],
+    o:{q1:["UGC / Nano","Micro (<100k)","Mid (100k–1M)","Macro (+1M)","Brand / azienda"],q2:["Instagram","TikTok","YouTube","Twitch","Newsletter","Podcast","LinkedIn","Altro"],q4:["Meno del 20%","20–50%","50–80%","Più dell'80%"],q5:["Meno di €500","€500–€2.000","€2.000–€10.000","€10.000–€50.000","Più di €50.000"],q6:["Meno di 15 giorni","15–30 giorni","30–60 giorni","60–90 giorni","Più di 90 giorni"],q7:["Sì, molte volte","Sì, qualche volta","No, mai"],q9:["Sì, l'ho ottenuto","Sì, mi hanno rifiutato","Non ho provato","Non ne avevo bisogno"],q10:["Nessuna storia creditizia","Reddito variabile","Non sapevo come","Sfiducia nelle banche","Troppa burocrazia","Non applicabile"],q11:["Sì, quasi sempre","Sì, a volte","Dipende dalla commissione","No, preferisco aspettare"],q12:["Fino al 2% (€100)","2–5% (€100–250)","5–8% (€250–400)","Più dell'8%","Non lo userei"],q14:["Attrezzatura / tecnologia","Produzione contenuti","Viaggi / eventi","Pubblicità a pagamento","Team / collaboratori","Software / abbonamenti","Lifestyle / personale"],q16:["Marketplace campagne","Contabilità / gestione","Contratti legali","Assicurazione campagne","Assicurazione attrezzature","Analytics guadagni","Strumenti AI","Coaching / mentoring"],q17:["Sì","Dipende dal prezzo","Preferisco pay-per-use","No"],q18:["Solo se gratis","Fino a €20/mese","€20–€50/mese","€50–€100/mese","Più di €100/mese"],q19:["Sì, coperto","Parzialmente","No, ma lo cercherei","Non mi interessa"],q20:["Azione legale","Trattativa diretta","Lo gestisce la mia agenzia","Di solito lo perdo","Non mi è mai capitato"],q21:["DM diretti","Agenzia di talenti","Piattaforme (Influencity, ecc.)","Rete propria / referral","I brand mi contattano"],q22:["Sì, molto attivamente","Sì, a volte","Dipende dai brand","No"],q23:["Lifestyle / Fashion","Tech / App","Fintech / Banche","Viaggi / Ospitalità","Alimentazione / Wellness","Gaming","Beauty / Skincare","Software B2B"]},
+    sc:{q13:["Nessuno","Moltissimo"],q15:["Non importa","Molto importante"],q25:["Per niente","Molto"]},
+    ph:{q8:"Raccontaci con parole tue...",q24:"Es: Revolut, Fineco, PayPal, nessuna...",q26:"Senza filtri...",q27:"Sogna ad alta voce...",q28:"tua@email.com"},
+    q28hint:"Niente spam. Solo un messaggio quando apriremo l'accesso anticipato.",
+    submitNote:"Le tue risposte sono anonime e usate esclusivamente per la progettazione del prodotto. Tempo stimato: 6–8 minuti.",
+    submitBtn:"Invia l'intervista →",
+    successTitle:"Grazie, <span class='grad'>davvero.</span>",
+    successSub:"Ogni risposta dà forma a qualcosa che non è mai esistito per i creator. Quando lanceremo, sarai tra i primi."
+  },
+  fr: {
+    eyebrow:"La fintech pour l'économie des créateurs",
+    heroTitle:"Ta voix façonne <span class='grad'>notre produit</span>",
+    heroSub:"Nous construisons l'infrastructure financière que les créateurs méritent. Cet entretien dure 6–8 minutes et chaque réponse impacte directement ce que nous construisons.",
+    progLabel:"Progression",
+    s:["Profil du créateur","Difficultés financières actuelles","Carte et avance sur paiements","Écosystème 360°","Marketplace et deals","Clôture"],
+    q:["Comment te définis-tu en tant que créateur ?","Sur quelles plateformes génères-tu principalement des revenus ? (multiple)","Dans quel pays ou région opères-tu principalement ?","Quel pourcentage de tes revenus provient de collaborations avec des marques ?","Quel est ton revenu mensuel moyen issu de contenu sponsorisé ?","Combien de temps s'écoule entre la livraison d'un travail et le paiement ?","As-tu déjà refusé un investissement (équipement, production, voyage) par manque de liquidités à ce moment-là ?","Comment gères-tu actuellement le délai entre la livraison et le paiement ?","As-tu déjà essayé d'obtenir un crédit bancaire pour financer ton activité de créateur ?","Si tu as été refusé ou si tu n'as pas essayé, pourquoi ? (multiple)","Si tu pouvais avancer le paiement d'un contrat déjà signé avec une marque contre une petite commission, l'utiliserais-tu ?","Quelle commission maximale paierais-tu pour recevoir 5 000 € en 48h plutôt qu'en 60 jours ?","Quelle valeur accorderais-tu à une carte dont le plafond est lié à tes contrats signés, et non à ton historique bancaire ?","À quoi dépenserais-tu principalement cette carte ? (multiple)","À quel point est-il important que la carte reflète ton identité de créateur ?","Quels services t'apporteraient le plus de valeur au sein d'un même écosystème ? (multiple)","Paierais-tu un abonnement mensuel pour accéder à tout l'écosystème ?","Combien paierais-tu pour un plan premium mensuel (carte + avances + services) ?","As-tu actuellement une assurance couvrant ton matériel de travail (caméras, laptop, drones) ?","Si une marque annule ou ne paie pas une campagne déjà réalisée, comment tu gères ça ?","Comment obtiens-tu actuellement tes collaborations avec des marques ? (multiple)","Utiliserais-tu un marketplace intégré dans l'app pour découvrir des campagnes actives ?","Quelles catégories de marques t'intéressent le plus ? (multiple)","Quelle application financière utilises-tu actuellement ?","Dans quelle mesure fais-tu confiance aux banques traditionnelles pour comprendre tes besoins en tant que créateur ?","Quel est ton principal problème financier en tant que créateur aujourd'hui ?","Si la solution financière parfaite pour les créateurs existait, à quoi ressemblerait-elle ?","Veux-tu qu'on te prévienne lorsque nous lançons ? (optionnel)"],
+    q3o:["— Sélectionner —","Espagne","Argentine","Mexique","Colombie","Chili","Autre LATAM","Autre Europe","Autre"],
+    o:{q1:["UGC / Nano","Micro (<100k)","Mid (100k–1M)","Macro (+1M)","Marque / entreprise"],q2:["Instagram","TikTok","YouTube","Twitch","Newsletter","Podcast","LinkedIn","Autre"],q4:["Moins de 20 %","20–50 %","50–80 %","Plus de 80 %"],q5:["Moins de €500","€500–€2 000","€2 000–€10 000","€10 000–€50 000","Plus de €50 000"],q6:["Moins de 15 jours","15–30 jours","30–60 jours","60–90 jours","Plus de 90 jours"],q7:["Oui, plusieurs fois","Oui, une fois","Non, jamais"],q9:["Oui, je l'ai obtenu","Oui, j'ai été refusé","Je n'ai pas essayé","Je n'en avais pas besoin"],q10:["Pas d'historique de crédit","Revenus variables","Je ne savais pas comment","Méfiance envers les banques","Trop de démarches","Non applicable"],q11:["Oui, presque toujours","Oui, parfois","Ça dépend de la commission","Non, je préfère attendre"],q12:["Jusqu'à 2 % (€100)","2–5 % (€100–250)","5–8 % (€250–400)","Plus de 8 %","Je ne l'utiliserais pas"],q14:["Équipement / technologie","Production de contenu","Voyages / événements","Publicité payante","Équipe / collaborateurs","Logiciels / abonnements","Lifestyle / personnel"],q16:["Marketplace de campagnes","Comptabilité / gestion","Contrats légaux","Assurance campagnes","Assurance équipement","Analytics de revenus","Outils IA","Coaching / mentorat"],q17:["Oui","Ça dépend du prix","Je préfère payer à l'usage","Non"],q18:["Seulement si gratuit","Jusqu'à €20/mois","€20–€50/mois","€50–€100/mois","Plus de €100/mois"],q19:["Oui, couvert","Partiellement","Non, mais je le chercherais","Pas intéressé(e)"],q20:["Recours légal","Négociation directe","Mon agence s'en occupe","Je le perds généralement","Ça ne m'est pas arrivé"],q21:["DMs directs","Agence de talent","Plateformes (Influencity, etc.)","Réseau propre / recommandations","Les marques me contactent"],q22:["Oui, très activement","Oui, parfois","Ça dépend des marques","Non"],q23:["Lifestyle / Fashion","Tech / Apps","Fintech / Banques","Voyages / Hôtellerie","Alimentation / Wellness","Gaming","Beauty / Skincare","Logiciels B2B"]},
+    sc:{q13:["Aucune","Énorme"],q15:["Pas important","Très important"],q25:["Pas du tout","Beaucoup"]},
+    ph:{q8:"Dis-nous avec tes mots...",q24:"Ex : Revolut, Boursorama, PayPal, aucune...",q26:"Sans filtre...",q27:"Rêve à voix haute...",q28:"toi@email.com"},
+    q28hint:"Pas de spam. Juste un message quand nous ouvrirons l'accès anticipé.",
+    submitNote:"Tes réponses sont anonymes et utilisées uniquement pour la conception du produit. Durée estimée : 6–8 minutes.",
+    submitBtn:"Envoyer l'entretien →",
+    successTitle:"Merci, <span class='grad'>vraiment.</span>",
+    successSub:"Chaque réponse façonne quelque chose qui n'a jamais existé pour les créateurs. Lorsque nous lancerons, tu seras parmi les premiers."
+  },
+  pt: {
+    eyebrow:"Fintech para a economia dos criadores",
+    heroTitle:"A tua voz molda <span class='grad'>o nosso produto</span>",
+    heroSub:"Estamos a construir a infraestrutura financeira que os criadores merecem. Esta entrevista demora 6–8 minutos e cada resposta impacta diretamente o que construímos.",
+    progLabel:"Progresso",
+    s:["Perfil do criador","Dificuldades financeiras atuais","Cartão e adiantamento de pagamentos","Ecossistema 360°","Marketplace e deals","Encerramento"],
+    q:["Como te identificas como criador?","Em que plataformas ganhas dinheiro principalmente? (múltiplo)","Em que país ou região operas principalmente?","Que percentagem dos teus rendimentos provém de colaborações com marcas?","Qual é o teu rendimento mensal médio com conteúdo patrocinado?","Quanto tempo passa entre a entrega de um trabalho e o pagamento?","Já recusaste algum investimento (equipamento, produção, viagem) por falta de liquidez naquele momento?","Como geres atualmente o intervalo entre a entrega e o pagamento?","Já tentaste obter crédito bancário para financiar a tua atividade como criador?","Se foste recusado ou não tentaste, porquê? (múltiplo)","Se pudesses adiantar o pagamento de um contrato já assinado com uma marca por uma pequena taxa, usarias?","Qual é a taxa máxima que pagarias para receber €5.000 em 48h em vez de 60 dias?","Que valor darias a um cartão cujo limite está associado aos teus contratos assinados, em vez do teu histórico bancário?","Em que gastarias principalmente esse cartão? (múltiplo)","Quão importante é para ti que o cartão reflita a tua identidade como criador?","Quais destes serviços te dariam mais valor num único ecossistema? (múltiplo)","Pagarias uma subscrição mensal para aceder a todo o ecossistema?","Quanto pagarias por um plano premium mensal (cartão + adiantamentos + serviços)?","Tens atualmente algum seguro que cubra os teus equipamentos de trabalho (câmeras, laptop, drones)?","Se uma marca cancela ou não paga uma campanha já realizada, como resolves?","Como consegues atualmente as tuas colaborações com marcas? (múltiplo)","Usarias um marketplace integrado na app para descobrir campanhas ativas?","Que categorias de marcas te interessam mais? (múltiplo)","Que app financeira usas atualmente?","Quanto confias nos bancos tradicionais para entender as tuas necessidades como criador?","Qual é a tua maior dificuldade financeira como criador hoje?","Se existisse a solução financeira perfeita para criadores, como seria?","Queres que te avisemos quando lançarmos? (opcional)"],
+    q3o:["— Selecionar —","Espanha","Argentina","México","Colômbia","Chile","Outro LATAM","Outra Europa","Outro"],
+    o:{q1:["UGC / Nano","Micro (<100k)","Mid (100k–1M)","Macro (+1M)","Marca / empresa"],q2:["Instagram","TikTok","YouTube","Twitch","Newsletter","Podcast","LinkedIn","Outro"],q4:["Menos de 20%","20–50%","50–80%","Mais de 80%"],q5:["Menos de €500","€500–€2.000","€2.000–€10.000","€10.000–€50.000","Mais de €50.000"],q6:["Menos de 15 dias","15–30 dias","30–60 dias","60–90 dias","Mais de 90 dias"],q7:["Sim, várias vezes","Sim, algumas vezes","Não, nunca"],q9:["Sim, obtive","Sim, fui recusado","Não tentei","Não precisei"],q10:["Sem historial de crédito","Rendimentos variáveis","Não sabia como","Desconfiança nos bancos","Demasiada burocracia","Não aplicável"],q11:["Sim, quase sempre","Sim, às vezes","Depende da taxa","Não, prefiro esperar"],q12:["Até 2% (€100)","2–5% (€100–250)","5–8% (€250–400)","Mais de 8%","Não usaria"],q14:["Equipamento / tecnologia","Produção de conteúdo","Viagens / eventos","Publicidade paga","Equipa / colaboradores","Software / subscrições","Lifestyle / pessoal"],q16:["Marketplace de campanhas","Contabilidade / gestão","Contratos legais","Seguro de campanhas","Seguro de equipamentos","Analytics de rendimentos","Ferramentas de IA","Coaching / mentoria"],q17:["Sim","Depende do preço","Prefiro pagar por uso","Não"],q18:["Só se for gratuito","Até €20/mês","€20–€50/mês","€50–€100/mês","Mais de €100/mês"],q19:["Sim, coberto","Parcialmente","Não, mas procuraria","Não me interessa"],q20:["Ação legal","Negociação direta","A minha agência trata disso","Geralmente perco","Nunca me aconteceu"],q21:["DMs diretos","Agência de talentos","Plataformas (Influencity, etc.)","Rede própria / referências","As marcas contactam-me"],q22:["Sim, muito ativamente","Sim, às vezes","Dependia das marcas","Não"],q23:["Lifestyle / Fashion","Tech / Apps","Fintech / Bancos","Viagens / Hotelaria","Alimentação / Wellness","Gaming","Beauty / Skincare","Software B2B"]},
+    sc:{q13:["Nenhum","Muitíssimo"],q15:["Não importa","Muito importante"],q25:["Nada","Muito"]},
+    ph:{q8:"Conta-nos com as tuas palavras...",q24:"Ex: Revolut, MB Way, PayPal, nenhuma...",q26:"Sem filtros...",q27:"Sonha em voz alta...",q28:"tu@email.com"},
+    q28hint:"Sem spam. Apenas uma mensagem quando abrirmos o acesso antecipado.",
+    submitNote:"As tuas respostas são anónimas e usadas exclusivamente para design de produto. Tempo estimado: 6–8 minutos.",
+    submitBtn:"Enviar entrevista →",
+    successTitle:"Obrigado, <span class='grad'>de verdade.</span>",
+    successSub:"Cada resposta molda algo que nunca existiu para os criadores. Quando lançarmos, serás dos primeiros a saber."
+  }
+};
+
+// Pill builder
+function mkPills(cid, name, opts, multi) {
+  const c = document.getElementById(cid);
+  c.innerHTML = '';
+  opts.forEach(o => {
+    const l = document.createElement('label');
+    const i = document.createElement('input');
+    i.type = multi ? 'checkbox' : 'radio'; i.name = name; i.value = o;
+    const s = document.createElement('span'); s.textContent = o;
+    l.appendChild(i); l.appendChild(s); c.appendChild(l);
+  });
+}
+
+// Scale builder
+function mkScale(wid, hid) {
+  const w = document.getElementById(wid); w.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'scale-btn'; b.textContent = i;
-    b.addEventListener('click', () => {
-      wr.querySelectorAll('.scale-btn').forEach(x => x.classList.remove('on'));
+    b.onclick = () => {
+      w.querySelectorAll('.scale-btn').forEach(x => x.classList.remove('on'));
       b.classList.add('on');
-      document.getElementById(hidId).value = i;
+      document.getElementById(hid).value = i;
       tick();
-    });
-    wr.appendChild(b);
+    };
+    w.appendChild(b);
   }
 }
-mkScale('sc13','v13',5);
-mkScale('sc15','v15',5);
-mkScale('sc25','v25',5);
 
-// ── Progress ──
-const TOTAL = 28;
-function countDone() {
-  const f = document.getElementById('main-form');
-  let n = 0;
-  const rg = {}; f.querySelectorAll('input[type=radio]').forEach(r=>{if(!rg[r.name])rg[r.name]=false;if(r.checked)rg[r.name]=true;});
-  Object.values(rg).forEach(v=>{if(v)n++;});
-  const cg = {}; f.querySelectorAll('input[type=checkbox]').forEach(c=>{if(!cg[c.name])cg[c.name]=false;if(c.checked)cg[c.name]=true;});
-  Object.values(cg).forEach(v=>{if(v)n++;});
-  f.querySelectorAll('select').forEach(s=>{if(s.value)n++;});
-  f.querySelectorAll('textarea').forEach(t=>{if(t.value.trim())n++;});
-  f.querySelectorAll('input[type=text],input[type=email]').forEach(i=>{if(i.value.trim())n++;});
-  f.querySelectorAll('input[type=hidden]').forEach(i=>{if(i.value&&i.id)n++;});
-  return Math.min(n, TOTAL);
+// Apply language
+let lang = 'es';
+function applyLang(l) {
+  lang = l;
+  const t = T[l];
+  document.documentElement.lang = l;
+  document.getElementById('field-lang').value = l;
+
+  document.getElementById('h-eyebrow').textContent = t.eyebrow;
+  document.getElementById('h-title').innerHTML = t.heroTitle;
+  document.getElementById('h-sub').textContent = t.heroSub;
+  document.getElementById('prog-label').textContent = t.progLabel;
+
+  t.s.forEach((v,i) => { const el = document.getElementById('s'+(i+1)+'-title'); if(el) el.textContent = v; });
+  t.q.forEach((v,i) => { const el = document.getElementById('q'+(i+1)+'-text'); if(el) el.textContent = v; });
+
+  // Pills
+  const multi = {q2:1,q10:1,q14:1,q16:1,q21:1,q23:1};
+  ['q1','q2','q4','q5','q6','q7','q9','q10','q11','q12','q14','q16','q17','q18','q19','q20','q21','q22','q23'].forEach(k => {
+    mkPills(k+'-pills', k, t.o[k], !!multi[k]);
+  });
+
+  // Select q3
+  const sel = document.getElementById('q3-sel'); sel.innerHTML = '';
+  t.q3o.forEach((o,i) => { const op = document.createElement('option'); op.value = i===0?'':o; op.textContent = o; sel.appendChild(op); });
+
+  // Scales
+  mkScale('sc13','v13'); document.getElementById('sc13-lo').textContent = t.sc.q13[0]; document.getElementById('sc13-hi').textContent = t.sc.q13[1];
+  mkScale('sc15','v15'); document.getElementById('sc15-lo').textContent = t.sc.q15[0]; document.getElementById('sc15-hi').textContent = t.sc.q15[1];
+  mkScale('sc25','v25'); document.getElementById('sc25-lo').textContent = t.sc.q25[0]; document.getElementById('sc25-hi').textContent = t.sc.q25[1];
+
+  // Placeholders & static text
+  document.getElementById('q8-ta').placeholder = t.ph.q8;
+  document.getElementById('q24-in').placeholder = t.ph.q24;
+  document.getElementById('q26-ta').placeholder = t.ph.q26;
+  document.getElementById('q27-ta').placeholder = t.ph.q27;
+  document.getElementById('q28-in').placeholder = t.ph.q28;
+  document.getElementById('q28-hint').textContent = t.q28hint;
+  document.getElementById('submit-note').textContent = t.submitNote;
+  document.getElementById('submit-btn').textContent = t.submitBtn;
+  document.getElementById('success-title').innerHTML = t.successTitle;
+  document.getElementById('success-sub').textContent = t.successSub;
+
+  tick();
 }
+
+// Lang buttons
+document.querySelectorAll('.lang-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.lang-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    applyLang(b.dataset.lang);
+  });
+});
+
+// Progress
+const TOTAL = 28;
 function tick() {
-  const n = countDone();
-  const p = Math.round(n/TOTAL*100);
-  document.getElementById('bar').style.width = p+'%';
-  document.getElementById('pct').textContent = n+' / '+TOTAL;
+  const f = document.getElementById('main-form'); let n = 0;
+  const rg = {}; f.querySelectorAll('input[type=radio]').forEach(r => { if(!rg[r.name])rg[r.name]=false; if(r.checked)rg[r.name]=true; });
+  Object.values(rg).forEach(v => { if(v)n++; });
+  const cg = {}; f.querySelectorAll('input[type=checkbox]').forEach(c => { if(!cg[c.name])cg[c.name]=false; if(c.checked)cg[c.name]=true; });
+  Object.values(cg).forEach(v => { if(v)n++; });
+  f.querySelectorAll('select').forEach(s => { if(s.value)n++; });
+  f.querySelectorAll('textarea').forEach(t => { if(t.value.trim())n++; });
+  f.querySelectorAll('input[type=text],input[type=email]').forEach(i => { if(i.value.trim())n++; });
+  f.querySelectorAll('input[type=hidden]').forEach(i => { if(i.id&&i.value)n++; });
+  n = Math.min(n, TOTAL);
+  document.getElementById('prog-bar').style.width = Math.round(n/TOTAL*100)+'%';
+  document.getElementById('prog-count').textContent = n+' / '+TOTAL;
 }
 document.getElementById('main-form').addEventListener('input', tick);
 document.getElementById('main-form').addEventListener('change', tick);
 
-// ── Collect ──
-function collect() {
-  const f = document.getElementById('main-form'), d = {};
-  const rg={}; f.querySelectorAll('input[type=radio]').forEach(r=>{if(!rg[r.name])rg[r.name]=null;if(r.checked)rg[r.name]=r.value;});
-  Object.assign(d, rg);
-  const cg={}; f.querySelectorAll('input[type=checkbox]').forEach(c=>{if(!cg[c.name])cg[c.name]=[];if(c.checked)cg[c.name].push(c.value);});
-  Object.assign(d, cg);
-  f.querySelectorAll('select,textarea').forEach(el=>{if(el.name)d[el.name]=el.value;});
-  f.querySelectorAll('input[type=text],input[type=email]').forEach(el=>{if(el.name)d[el.name]=el.value;});
-  f.querySelectorAll('input[type=hidden]').forEach(el=>{if(el.id&&el.value)d[el.name]=el.value;});
-  d.timestamp = new Date().toISOString();
-  return d;
-}
-
-// ── Submit → Netlify Forms ──
+// Submit → Netlify
 document.getElementById('main-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const answers = collect();
-  window._answers = answers;
-
-  // Build flat form-encoded body for Netlify
-  const flat = {};
-  for (const [k,v] of Object.entries(answers)) {
-    flat[k] = Array.isArray(v) ? v.join(', ') : (v ?? '');
-  }
-  flat['form-name'] = 'creator-research';
-
-  try {
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(flat).toString()
-    });
-  } catch(_) { /* offline fallback: data still downloads */ }
-
-  document.getElementById('main-form').style.display = 'none';
+  const f = document.getElementById('main-form');
+  const flat = {'form-name':'creator-research', lang};
+  const rg = {}; f.querySelectorAll('input[type=radio]').forEach(r => { if(r.checked) rg[r.name]=r.value; }); Object.assign(flat,rg);
+  const cg = {}; f.querySelectorAll('input[type=checkbox]').forEach(c => { if(!cg[c.name])cg[c.name]=[]; if(c.checked)cg[c.name].push(c.value); });
+  for(const [k,v] of Object.entries(cg)) flat[k]=v.join(', ');
+  f.querySelectorAll('select,textarea').forEach(el => { if(el.name)flat[el.name]=el.value; });
+  f.querySelectorAll('input[type=text],input[type=email]').forEach(el => { if(el.name)flat[el.name]=el.value; });
+  f.querySelectorAll('input[type=hidden]').forEach(el => { if(el.id&&el.value)flat[el.name]=el.value; });
+  try { await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(flat).toString()}); } catch(_){}
+  f.style.display='none';
   document.getElementById('success').classList.add('show');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
 });
 
-// ── Download JSON ──
-document.getElementById('dl-btn').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(window._answers||{}, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'flowstate-research.json'; a.click();
-  URL.revokeObjectURL(url);
-});
+// Init
+applyLang('es');
 </script>
 </body>
 </html>
